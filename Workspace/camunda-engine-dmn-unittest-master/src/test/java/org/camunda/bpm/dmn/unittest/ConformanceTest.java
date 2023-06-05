@@ -39,7 +39,7 @@ import org.camunda.bpm.engine.variable.Variables;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class SimpleTestCase {
+public class ConformanceTest {
 
 	@Rule
 	public DmnEngineRule rule = new DmnEngineRule();
@@ -78,7 +78,7 @@ public class SimpleTestCase {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\End.csv"))) {	
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\RespondedExistence.csv"))) {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Response.csv"))) {
-						new FileReader("C:\\DMN CC\\dmn-cc\\\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) {
+						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) {
 			
 			String line = "";
 			// Do the first readLine here to "remove" the headline
