@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_1uamazx" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="testDecision" name="Check Participation">
+    <decisionTable id="DecisionTable_1teelrm">
+      <input id="Input_1" label="Case" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1ymkalu">
+        <inputEntry id="UnaryTests_0g1yev2">
+          <text>count(eventlist) &gt; 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19si9su">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_031y4c2">
+        <inputEntry id="UnaryTests_1bd1zz4">
+          <text>count(eventlist) &lt; 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wwgpm3">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="testDecision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

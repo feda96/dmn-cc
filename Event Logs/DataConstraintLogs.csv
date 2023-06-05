@@ -1,0 +1,19 @@
+﻿Case ID;Activity;Data;Timestamp
+1;Order received;Customer name, order details;01/04/2023 09:00
+1;Verify availability;Product availability, order details;01/04/2023 09:15
+1;Generate invoice;Invoice amount, customer name, order details;01/04/2023 09:30
+1;Send invoice;Invoice amount, customer name, order details;01/04/2023 09:45
+1;Receive payment;Payment amount, customer name, invoice number;01/04/2023 14:00
+1;Verify payment;Payment amount, customer name, invoice number;01/04/2023 14:30
+1;Mark invoice as paid;Payment amount, customer name, invoice number;01/04/2023 15:00
+1;Close invoice;Invoice status, customer name, invoice number;01/04/2023 15:15
+1;Order fulfilled;Order status, customer name, order details;01/04/2023 15:30
+2;Order received;Customer name, order details;01/04/2023 09:00
+2;Verify availability;Product availability, order details;01/04/2023 09:15
+2;Generate invoice;Invoice amount, customer name, order details;01/04/2023 09:30
+2;Send invoice;Invoice amount+300, customer name, order details;01/04/2023 09:45
+2;Receive payment;Payment amount, customer name, invoice number;01/04/2023 14:00
+2;Verify payment;Payment amount, customer name, invoice number;01/04/2023 14:30
+2;Mark invoice as paid;Payment amount, customer name, invoice number + 3;01/04/2023 15:00
+2;Close invoice;Invoice status, customer name, invoice number;01/04/2023 15:15
+2;Order fulfilled;Order status, customer name, order details;01/04/2023 15:30

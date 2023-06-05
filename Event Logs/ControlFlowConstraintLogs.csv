@@ -1,0 +1,19 @@
+﻿Case ID;Activity;Timestamp
+1;Order received;01/04/2023 09:00
+1;Verify availability;01/04/2023 09:15
+1;Generate invoice;01/04/2023 09:30
+1;Send invoice;01/04/2023 09:45
+1;Receive payment;01/04/2023 14:00
+1;Verify payment;01/04/2023 14:30
+1;Mark invoice as paid;01/04/2023 15:00
+1;Close invoice;01/04/2023 15:15
+1;Order fulfilled;01/04/2023 15:30
+2;Order received;01/04/2023 09:00
+2;Send invoice;01/04/2023 09:15
+2;Generate invoice;01/04/2023 09:30
+2;Verify availability;01/04/2023 09:45
+2;Receive payment;01/04/2023 14:00
+2;Verify payment;01/04/2023 14:30
+2;Mark invoice as paid;01/04/2023 15:00
+2;Close invoice;01/04/2023 15:15
+2;Order fulfilled;01/04/2023 15:30

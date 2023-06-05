@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0pka7st" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="participationDecision" name="Participation Decision">
+    <decisionTable id="DecisionTable_12rhob4" hitPolicy="FIRST">
+      <input id="Input_1" label="Eventlist" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1ujh4x4">
+        <inputEntry id="UnaryTests_1vtr7yp">
+          <text>some event in eventlist satisfies event[1]="Send invoice"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j7r55y">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sav68f">
+        <inputEntry id="UnaryTests_0715g70">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oqf5u2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="participationDecision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

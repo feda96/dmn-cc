@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0pka7st" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="participationDecision" name="Participation Decision">
+    <decisionTable id="DecisionTable_12rhob4" hitPolicy="FIRST">
+      <input id="Input_1" label="Eventlist" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1ujh4x4">
+        <inputEntry id="UnaryTests_1vtr7yp">
+          <text>some event in eventlist satisfies event[1]="Send invoice"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j7r55y">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sav68f">
+        <inputEntry id="UnaryTests_0715g70">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oqf5u2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="initDecision" name="Init Decision">
+    <decisionTable id="DecisionTable_0x0rcaq" hitPolicy="FIRST">
+      <input id="InputClause_0dczg0a" label="Eventlist">
+        <inputExpression id="LiteralExpression_1ah1ks3" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0n1qcp9" label="Conformance" name="conformance" typeRef="Any" />
+      <rule id="DecisionRule_1xe56bo">
+        <inputEntry id="UnaryTests_0br4jh6">
+          <text>((eventlist[1])[1] = "Order received") = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fwn6s8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m1kpmh">
+        <inputEntry id="UnaryTests_1yuxtp5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n80r5e">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="endDecision" name="End Decision">
+    <decisionTable id="DecisionTable_1eijs25" hitPolicy="FIRST">
+      <input id="InputClause_1ecj0e4" label="Eventlist">
+        <inputExpression id="LiteralExpression_1qafayl" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_181wv0a" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1sf9rk3">
+        <inputEntry id="UnaryTests_1l9ivl2">
+          <text>((eventlist[-1])[1] = "Order fulfilled") = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_139crk6">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_197pv3j">
+        <inputEntry id="UnaryTests_13pv54q">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rki8r1">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="atmostoneDecision" name="AtMostOne Decision">
+    <decisionTable id="DecisionTable_0spd4wd" hitPolicy="FIRST">
+      <input id="InputClause_06dk999" label="Eventlist">
+        <inputExpression id="LiteralExpression_0fhgf3f" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0a8ci50" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1eb491s">
+        <inputEntry id="UnaryTests_0if8myw">
+          <text>(count(eventlist[item[1]="Send invoice"]) &gt;= 2) = false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1v9jqud">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1qs0dit">
+        <inputEntry id="UnaryTests_0v1axct">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ht1li0">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="respondedExistenceDecision" name="RespondedExistence Decision">
+    <decisionTable id="DecisionTable_1qvv5mz" hitPolicy="FIRST">
+      <input id="InputClause_1vavbn6" label="Eventlist" biodi:width="192">
+        <inputExpression id="LiteralExpression_0fzcc2j" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_04exszc" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_0kvxoge">
+        <inputEntry id="UnaryTests_0zxllkf">
+          <text>(if 
+(some event in eventlist satisfies event[1]="Generate invoice")
+then
+if
+(some event in eventlist satisfies event[1]="Send invoice")
+then 
+true
+else
+false
+else 
+true) = true
+
+</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18f6qiz">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kipibd">
+        <inputEntry id="UnaryTests_1xsfyyf">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1krg9u8">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="responseDecision" name="Response Decision">
+    <decisionTable id="DecisionTable_0nb6iud" hitPolicy="FIRST">
+      <input id="InputClause_1sjgq56" label="Eventlist">
+        <inputExpression id="LiteralExpression_1tiz20y" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0j0p11q" label="Conformance" name="conformance" typeRef="Any" biodi:width="192" />
+      <rule id="DecisionRule_1xwjnkr">
+        <inputEntry id="UnaryTests_0lb0opv">
+          <text>(if 
+(some event in eventlist satisfies event[1]="Generate invoice")
+then
+if
+(some event in eventlist satisfies event[1]="Send invoice")
+then 
+if (every x in eventlist[item[1]="Send invoice"] satisfies 
+(before (eventlist[item[1]="Generate invoice"][1][2], x[2])))
+then
+true
+else
+false
+else
+false
+else 
+true) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07b9nm1">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0fzazes">
+        <inputEntry id="UnaryTests_1xjnn1o">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kt2j1g">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="alternateResponseDecision" name="AlternateResponse Decision">
+    <decisionTable id="DecisionTable_1n8138y" hitPolicy="FIRST">
+      <input id="InputClause_17h4czc" label="Eventlist">
+        <inputExpression id="LiteralExpression_1vqjqaa" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0x651wy" label="Conformance" name="conformance" typeRef="Any" biodi:width="192" />
+      <rule id="DecisionRule_0mgoc0e">
+        <inputEntry id="UnaryTests_0g3wn57">
+          <text>(if 
+(some event in eventlist satisfies event[1]="Generate invoice")
+then 
+	if (some event in eventlist satisfies event[1]="Send invoice") 
+	then 
+if (every y in eventlist[item[1]="Send invoice"] satisfies before(eventlist[item[1]="Generate invoice"][1][2],y[2]))
+		and 
+		(if (is defined (eventlist[item[1]="Generate invoice"][2])) 
+		then (before (eventlist[item[1]="Send invoice"][1][2],eventlist[item[1]="Generate invoice"][2][2])) 
+		else true)
+		then true 
+		else false 
+	else false 
+else true) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xhfl5a">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0io9g6j">
+        <inputEntry id="UnaryTests_0tifa9x">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07s5it6">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="participationDecision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0n5foed" dmnElementRef="initDecision">
+        <dc:Bounds height="80" width="180" x="390" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1wgtul7" dmnElementRef="endDecision">
+        <dc:Bounds height="80" width="180" x="390" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1x644ys" dmnElementRef="atmostoneDecision">
+        <dc:Bounds height="80" width="180" x="160" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1k1k0sc" dmnElementRef="respondedExistenceDecision">
+        <dc:Bounds height="80" width="180" x="610" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1p9o09o" dmnElementRef="responseDecision">
+        <dc:Bounds height="80" width="180" x="610" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0n678q1" dmnElementRef="alternateResponseDecision">
+        <dc:Bounds height="80" width="180" x="830" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

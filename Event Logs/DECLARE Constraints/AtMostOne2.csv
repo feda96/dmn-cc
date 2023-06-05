@@ -1,0 +1,9 @@
+﻿Activity;Timestamp
+Order received;01/04/2023 09:00
+Verify availability;01/04/2023 09:15
+Generate invoice;01/04/2023 09:30
+Receive payment;01/04/2023 14:00
+Verify payment;01/04/2023 14:30
+Mark invoice as paid;01/04/2023 15:00
+Close invoice;01/04/2023 15:15
+Order fulfilled;01/04/2023 15:30
