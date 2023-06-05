@@ -7,7 +7,7 @@ In the Event Logs folder,more precise [here](Event%20Logs/), the example event l
 Structure for the unittest is heavily inspired by https://github.com/camunda/camunda-engine-dmn-unittest <br>
 To be able to look at the CC.dmn file and tables, https://camunda.com/download/modeler/ is advised. <br>
 ## usage
-To check the conformance of an event log for given DMN tables, run the SimpleTestCase Java class. <br>
+To check the conformance of an event log for given DMN tables, run the ConformanceTest Java class. <br>
 There are Event Logs and DMN tables for the different DECLARE constraints available. <br>
 ## todo
 - Add remaining DECLARE constraints
