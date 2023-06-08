@@ -59,7 +59,9 @@ public class ConformanceTest {
 //		DmnDecision decision = dmnEngine.parseDecision("endDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("respondedExistenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("responseDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("alternateResponseDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("alternateResponseDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("chainresponseDecision", inputStream);
+		DmnDecision decision = dmnEngine.parseDecision("precedenceDecision", inputStream);
 
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
@@ -78,7 +80,9 @@ public class ConformanceTest {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\End.csv"))) {	
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\RespondedExistence.csv"))) {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Response.csv"))) {
-						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) {
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) {
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainResponse.csv"))) {
+						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Precedence.csv"))) {
 			
 			String line = "";
 			// Do the first readLine here to "remove" the headline
