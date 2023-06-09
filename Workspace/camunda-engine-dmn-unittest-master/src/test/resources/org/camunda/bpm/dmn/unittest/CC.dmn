@@ -236,7 +236,7 @@ else true) = true</text>
 then 
 	if (some event in eventlist satisfies event[1]="Send invoice")
 	then
-		if (eventlist[(index of(eventlist,eventlist[item[1]="Generate invoice"][1]))[1]+1][1]="Send invoice")
+		if (every x in eventlist[item[1]="Generate invoice"] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]="Send invoice")
 		then true
 		else false
 	else false
@@ -291,6 +291,86 @@ else true) = true</text>
       </rule>
     </decisionTable>
   </decision>
+  <decision id="alternatePrecedenceDecision" name="AlternatePrecedence Decision">
+    <decisionTable id="DecisionTable_19birp5" hitPolicy="FIRST">
+      <input id="InputClause_0whdtxk" label="Eventlist">
+        <inputExpression id="LiteralExpression_1pkbpow" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_080fkyw" label="Conformance" name="conformance" typeRef="boolean" />
+    </decisionTable>
+  </decision>
+  <decision id="chainPrecedenceDecision" name="ChainPrecedence Decision">
+    <decisionTable id="DecisionTable_1garqt6" hitPolicy="FIRST">
+      <input id="InputClause_0ytqqrs" label="Eventlist">
+        <inputExpression id="LiteralExpression_0hq8o0j" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0dhf8fc" label="Conformance" name="conformance" typeRef="boolean" biodi:width="192" />
+      <rule id="DecisionRule_09pg8y8">
+        <inputEntry id="UnaryTests_06su7p9">
+          <text>(if (some event in eventlist satisfies event[1]="Send invoice") 
+then 
+	if (some event in eventlist satisfies event[1]="Generate invoice") 
+	then 
+		if (every y in eventlist[item[1]="Send invoice"] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]="Generate invoice"))
+		then true 
+		else false 
+	else false 
+else true) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mb5d7a">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0x6jznc">
+        <inputEntry id="UnaryTests_03c3r3s">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15ezkp1">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="coExistenceDecision" name="CoExistence Decision">
+    <decisionTable id="DecisionTable_1q85syc" hitPolicy="FIRST">
+      <input id="InputClause_1v7228z" label="Eventlist">
+        <inputExpression id="LiteralExpression_1lt86w6" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0ovcge9" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_07dn5ms">
+        <inputEntry id="UnaryTests_1u253vq">
+          <text>(
+if (some event in eventlist satisfies event[1]="Generate invoice")
+then 
+	if (some event in eventlist satisfies event[1]="Send invoice")
+	then true 
+	else false 
+else 
+	if (some event in eventlist satisfies event[1]="Send invoice")
+	then false
+	else true
+) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1e8zqrg">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1dhkch9">
+        <inputEntry id="UnaryTests_09q6y93">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uapfgu">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="participationDecision">
@@ -319,6 +399,15 @@ else true) = true</text>
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_05xm0v2" dmnElementRef="precedenceDecision">
         <dc:Bounds height="80" width="180" x="1050" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1hfdvu3" dmnElementRef="alternatePrecedenceDecision">
+        <dc:Bounds height="80" width="180" x="1050" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1d8jejh" dmnElementRef="chainPrecedenceDecision">
+        <dc:Bounds height="80" width="180" x="1270" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_089iw1z" dmnElementRef="coExistenceDecision">
+        <dc:Bounds height="80" width="180" x="1270" y="200" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

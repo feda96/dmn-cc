@@ -61,7 +61,10 @@ public class ConformanceTest {
 //		DmnDecision decision = dmnEngine.parseDecision("responseDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("alternateResponseDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("chainresponseDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("precedenceDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("precedenceDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("alternatePrecedenceDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("chainPrecedenceDecision", inputStream);
+		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
 
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
@@ -71,18 +74,22 @@ public class ConformanceTest {
 						// taking different CSV files (event logs) for each different constraint pattern to make sure
 						// to test relevant things
 						
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Participation.csv"))) {
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Participation.csv"))) 
 						// multiple "Send invoice"
-// 						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne1.csv"))) {
+// 						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne1.csv"))) 
 						// no "Send invoice"
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne2.csv"))) {
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Init.csv"))) {
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\End.csv"))) {	
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\RespondedExistence.csv"))) {
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Response.csv"))) {
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) {
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainResponse.csv"))) {
-						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Precedence.csv"))) {
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne2.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Init.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\End.csv"))) 	
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\RespondedExistence.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Response.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateResponse.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainResponse.csv"))) 
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Precedence.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternatePrecedence.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainPrecedence.csv")))
+						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\CoExistence.csv")))
+		{
 			
 			String line = "";
 			// Do the first readLine here to "remove" the headline
