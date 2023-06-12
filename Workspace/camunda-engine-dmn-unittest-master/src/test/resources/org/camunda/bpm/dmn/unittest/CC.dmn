@@ -371,43 +371,140 @@ else
       </rule>
     </decisionTable>
   </decision>
+  <decision id="successionDecision" name="Succession Decision">
+    <decisionTable id="DecisionTable_1acpglp" hitPolicy="FIRST">
+      <input id="InputClause_0zl75dm" label="Eventlist">
+        <inputExpression id="LiteralExpression_193fbv3" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0gfw2in" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_09sm6e3">
+        <inputEntry id="UnaryTests_0iu08fl">
+          <text>(
+if (some event in eventlist satisfies event[1]="Generate invoice") 
+then 
+	if (some event in eventlist satisfies event[1]="Send invoice") 
+	then 
+		if (every x in eventlist[item[1]="Send invoice"] satisfies (before (eventlist[item[1]="Generate invoice"][1][2],x[2])))
+		then true
+		else false 
+	else false 
+else 
+	if (some event in eventlist satisfies event[1]="Send invoice") 
+	then false 
+	else true
+) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rg759l">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0vu2x4g">
+        <inputEntry id="UnaryTests_01f33nx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05868kj">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="alternateSuccessionDecision" name="AlternateSuccession Decision">
+    <decisionTable id="DecisionTable_0aghfze">
+      <input id="InputClause_1bkg2kl">
+        <inputExpression id="LiteralExpression_1t1adps" typeRef="string" />
+      </input>
+      <output id="OutputClause_11oojbr" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="chainSuccessionDecision" name="ChainSuccession Decision">
+    <decisionTable id="DecisionTable_034ti7j">
+      <input id="InputClause_0s0mh8p">
+        <inputExpression id="LiteralExpression_1ygfbrt" typeRef="string" />
+      </input>
+      <output id="OutputClause_11gy02r" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="notSuccessionDecision" name="NotSuccession Decision">
+    <decisionTable id="DecisionTable_01pm9sx">
+      <input id="InputClause_0xzzx5e">
+        <inputExpression id="LiteralExpression_1rc103b" typeRef="string" />
+      </input>
+      <output id="OutputClause_0yrr2pa" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="notCoExistenceDecision" name="NotCoExistence Decision">
+    <decisionTable id="DecisionTable_0k3oihg">
+      <input id="InputClause_0zk1h07">
+        <inputExpression id="LiteralExpression_0gdgisq" typeRef="string" />
+      </input>
+      <output id="OutputClause_138ft61" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="notChainSuccessionDecision" name="NotChainSuccession Decision">
+    <decisionTable id="DecisionTable_0grk9ec">
+      <input id="InputClause_0a9vmt9">
+        <inputExpression id="LiteralExpression_0b3mddl" typeRef="string" />
+      </input>
+      <output id="OutputClause_0fz399j" typeRef="string" />
+    </decisionTable>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="participationDecision">
         <dc:Bounds height="80" width="180" x="160" y="100" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0n5foed" dmnElementRef="initDecision">
-        <dc:Bounds height="80" width="180" x="390" y="100" />
+        <dc:Bounds height="80" width="180" x="160" y="310" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1wgtul7" dmnElementRef="endDecision">
-        <dc:Bounds height="80" width="180" x="390" y="200" />
+        <dc:Bounds height="80" width="180" x="160" y="420" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1x644ys" dmnElementRef="atmostoneDecision">
         <dc:Bounds height="80" width="180" x="160" y="200" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1k1k0sc" dmnElementRef="respondedExistenceDecision">
-        <dc:Bounds height="80" width="180" x="610" y="100" />
+        <dc:Bounds height="80" width="180" x="380" y="100" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1p9o09o" dmnElementRef="responseDecision">
-        <dc:Bounds height="80" width="180" x="610" y="200" />
+        <dc:Bounds height="80" width="180" x="380" y="200" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0n678q1" dmnElementRef="alternateResponseDecision">
-        <dc:Bounds height="80" width="180" x="830" y="100" />
+        <dc:Bounds height="80" width="180" x="380" y="310" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_01oek78" dmnElementRef="chainresponseDecision">
-        <dc:Bounds height="80" width="180" x="830" y="200" />
+        <dc:Bounds height="80" width="180" x="380" y="420" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_05xm0v2" dmnElementRef="precedenceDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="100" />
+        <dc:Bounds height="80" width="180" x="600" y="200" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1hfdvu3" dmnElementRef="alternatePrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="200" />
+        <dc:Bounds height="80" width="180" x="600" y="310" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1d8jejh" dmnElementRef="chainPrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="1270" y="100" />
+        <dc:Bounds height="80" width="180" x="600" y="420" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_089iw1z" dmnElementRef="coExistenceDecision">
-        <dc:Bounds height="80" width="180" x="1270" y="200" />
+        <dc:Bounds height="80" width="180" x="820" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1hcnzld" dmnElementRef="successionDecision">
+        <dc:Bounds height="80" width="180" x="820" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1momqdd" dmnElementRef="alternateSuccessionDecision">
+        <dc:Bounds height="80" width="180" x="820" y="310" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_12xz6e1" dmnElementRef="chainSuccessionDecision">
+        <dc:Bounds height="80" width="180" x="820" y="420" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_18yjsuc" dmnElementRef="notSuccessionDecision">
+        <dc:Bounds height="80" width="180" x="1050" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_005qurn" dmnElementRef="notCoExistenceDecision">
+        <dc:Bounds height="80" width="180" x="1050" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0vv9982" dmnElementRef="notChainSuccessionDecision">
+        <dc:Bounds height="80" width="180" x="1050" y="420" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

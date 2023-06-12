@@ -64,7 +64,13 @@ public class ConformanceTest {
 //		DmnDecision decision = dmnEngine.parseDecision("precedenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("alternatePrecedenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("chainPrecedenceDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
+		DmnDecision decision = dmnEngine.parseDecision("successionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("alternateSuccesionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("chainSuccessionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("notChainSuccesionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("notSuccessionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("notCoExistenceDecision", inputStream);
 
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
@@ -88,7 +94,13 @@ public class ConformanceTest {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Precedence.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternatePrecedence.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainPrecedence.csv")))
-						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\CoExistence.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\CoExistence.csv")))
+						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Succession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateSuccession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainSuccession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotChainSuccession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotSuccession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotCoExistence.csv")))
 		{
 			
 			String line = "";
