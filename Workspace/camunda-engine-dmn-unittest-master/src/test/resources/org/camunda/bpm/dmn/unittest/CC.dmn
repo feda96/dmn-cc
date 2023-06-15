@@ -193,30 +193,19 @@ true) = true</text>
       <output id="OutputClause_0x651wy" label="Conformance" name="conformance" typeRef="boolean" biodi:width="192" />
       <rule id="DecisionRule_0mgoc0e">
         <inputEntry id="UnaryTests_0g3wn57">
-          <text>(if 
-(some event in eventlist satisfies event[1]="Generate invoice")
-then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
-	then 
-if (every y in eventlist[item[1]="Send invoice"] satisfies before(eventlist[item[1]="Generate invoice"][1][2],y[2]))
-		and 
-		(if (is defined (eventlist[item[1]="Generate invoice"][2])) 
-		then (before (eventlist[item[1]="Send invoice"][1][2],eventlist[item[1]="Generate invoice"][2][2])) 
-		else true)
-		then true 
-		else false 
-	else false 
-else true) = true</text>
+          <text>(if (some event in eventlist satisfies event[1]="Generate invoice")
+then if (some event in eventlist satisfies event[1]="Send invoice") then if (every x in eventlist[item[1]="Generate invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],x))[1]+1][1]="Send invoice")) then true else false else false else true) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0xhfl5a">
-          <text>true</text>
+          <text>true
+</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0io9g6j">
-        <inputEntry id="UnaryTests_0tifa9x">
+      <rule id="DecisionRule_09qixyv">
+        <inputEntry id="UnaryTests_1q7k27f">
           <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_07s5it6">
+        <outputEntry id="LiteralExpression_04o6ql2">
           <text>false</text>
         </outputEntry>
       </rule>
@@ -299,6 +288,23 @@ else true) = true</text>
         </inputExpression>
       </input>
       <output id="OutputClause_080fkyw" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1tr5vm6">
+        <inputEntry id="UnaryTests_1bgar4g">
+          <text>(if (some event in eventlist satisfies event[1]="Send invoice")
+then if (some event in eventlist satisfies event[1]="Generate invoice") then if (every y in eventlist[item[1]="Send invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice"or item[1]="Send invoice"],y))[1]-1][1]="Generate invoice")) then true else false else false else true) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13czhts">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0sb3ewx">
+        <inputEntry id="UnaryTests_0z3hm2c">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13qj0t2">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <decision id="chainPrecedenceDecision" name="ChainPrecedence Decision">
@@ -411,11 +417,30 @@ else
     </decisionTable>
   </decision>
   <decision id="alternateSuccessionDecision" name="AlternateSuccession Decision">
-    <decisionTable id="DecisionTable_0aghfze">
-      <input id="InputClause_1bkg2kl">
-        <inputExpression id="LiteralExpression_1t1adps" typeRef="string" />
+    <decisionTable id="DecisionTable_0aghfze" hitPolicy="FIRST">
+      <input id="InputClause_1bkg2kl" label="Eventlist">
+        <inputExpression id="LiteralExpression_1t1adps" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
       </input>
-      <output id="OutputClause_11oojbr" typeRef="string" />
+      <output id="OutputClause_11oojbr" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_0y077es">
+        <inputEntry id="UnaryTests_0c0vpk9">
+          <text>(if (some event in eventlist satisfies event[1]="Generate invoice")  
+then if (some event in eventlist satisfies event[1]="Send invoice") then 	if ((every y in eventlist[item[1]="Send invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],y))[1]-1][1]="Generate invoice")) and (every x in eventlist[item[1]="Generate invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],x))[1]+1][1]="Send invoice"))) then true else false else false else	if (some event in eventlist satisfies event[1]="Send invoice") then false else true) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jl921u">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1vz1ubs">
+        <inputEntry id="UnaryTests_0rngonc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0y2tr75">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <decision id="chainSuccessionDecision" name="ChainSuccession Decision">
@@ -458,19 +483,72 @@ else
     </decisionTable>
   </decision>
   <decision id="notSuccessionDecision" name="NotSuccession Decision">
-    <decisionTable id="DecisionTable_01pm9sx">
-      <input id="InputClause_0xzzx5e">
-        <inputExpression id="LiteralExpression_1rc103b" typeRef="string" />
+    <decisionTable id="DecisionTable_01pm9sx" hitPolicy="FIRST">
+      <input id="InputClause_0xzzx5e" label="Eventlist">
+        <inputExpression id="LiteralExpression_1rc103b" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
       </input>
-      <output id="OutputClause_0yrr2pa" typeRef="string" />
+      <output id="OutputClause_0yrr2pa" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_1lp623e">
+        <inputEntry id="UnaryTests_0mu06z4">
+          <text>(
+if (some event in eventlist satisfies event[1]="Generate invoice") 
+then 
+	if (some event in eventlist satisfies event[1]="Send invoice") 
+	then 
+		if (every x in eventlist[item[1]="Generate invoice"] satisfies (not(some y in eventlist[item[1]="Send invoice"] satisfies (before (x[2],y[2])))))
+		then true
+		else false 
+	else true 
+else true
+) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0q6r981">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tz87ig">
+        <inputEntry id="UnaryTests_1teygtz">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ulbomd">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <decision id="notCoExistenceDecision" name="NotCoExistence Decision">
-    <decisionTable id="DecisionTable_0k3oihg">
-      <input id="InputClause_0zk1h07">
-        <inputExpression id="LiteralExpression_0gdgisq" typeRef="string" />
+    <decisionTable id="DecisionTable_0k3oihg" hitPolicy="FIRST">
+      <input id="InputClause_0zk1h07" label="Eventlist">
+        <inputExpression id="LiteralExpression_0gdgisq" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
       </input>
-      <output id="OutputClause_138ft61" typeRef="string" />
+      <output id="OutputClause_138ft61" label="Conformance" name="conformance" typeRef="boolean" />
+      <rule id="DecisionRule_0tlkf1f">
+        <inputEntry id="UnaryTests_0wder1w">
+          <text>(
+if (some event in eventlist satisfies event[1]="Generate invoice") 
+then 
+	if (some event in eventlist satisfies event[1]="Send invoice") 
+	then false
+	else true 
+else true
+) = true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03ffxdu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0809l6z">
+        <inputEntry id="UnaryTests_1qbw4mu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1c8slqj">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <decision id="notChainSuccessionDecision" name="NotChainSuccession Decision">
