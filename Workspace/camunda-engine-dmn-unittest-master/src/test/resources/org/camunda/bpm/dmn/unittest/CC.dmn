@@ -10,7 +10,7 @@
       <output id="Output_1" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1ujh4x4">
         <inputEntry id="UnaryTests_1vtr7yp">
-          <text>some event in eventlist satisfies event[1]="Send invoice"</text>
+          <text>some event in eventlist satisfies event[1]=event1</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1j7r55y">
           <text>true</text>
@@ -36,7 +36,7 @@
       <output id="OutputClause_0n1qcp9" label="Conformance" name="conformance" typeRef="Any" />
       <rule id="DecisionRule_1xe56bo">
         <inputEntry id="UnaryTests_0br4jh6">
-          <text>((eventlist[1])[1] = "Order received") = true</text>
+          <text>((eventlist[1])[1] = event1) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1fwn6s8">
           <text>true</text>
@@ -62,7 +62,7 @@
       <output id="OutputClause_181wv0a" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1sf9rk3">
         <inputEntry id="UnaryTests_1l9ivl2">
-          <text>((eventlist[-1])[1] = "Order fulfilled") = true</text>
+          <text>((eventlist[-1])[1] = event1) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_139crk6">
           <text>true</text>
@@ -88,7 +88,7 @@
       <output id="OutputClause_0a8ci50" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1eb491s">
         <inputEntry id="UnaryTests_0if8myw">
-          <text>(count(eventlist[item[1]="Send invoice"]) &gt;= 2) = false</text>
+          <text>(count(eventlist[item[1]=event1]) &gt;= 2) = false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1v9jqud">
           <text>true</text>
@@ -111,14 +111,14 @@
           <text>eventlist</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_04exszc" label="Conformance" name="conformance" typeRef="boolean" />
+      <output id="OutputClause_04exszc" label="Conformance" name="conformance" typeRef="Any" />
       <rule id="DecisionRule_0kvxoge">
         <inputEntry id="UnaryTests_0zxllkf">
           <text>(if 
-(some event in eventlist satisfies event[1]="Generate invoice")
+(some event in eventlist satisfies event[1]=event1)
 then
 if
-(some event in eventlist satisfies event[1]="Send invoice")
+(some event in eventlist satisfies event[1]=event2)
 then 
 true
 else
@@ -153,13 +153,13 @@ true) = true
       <rule id="DecisionRule_1xwjnkr">
         <inputEntry id="UnaryTests_0lb0opv">
           <text>(if 
-(some event in eventlist satisfies event[1]="Generate invoice")
+(some event in eventlist satisfies event[1]=event1)
 then
 if
-(some event in eventlist satisfies event[1]="Send invoice")
+(some event in eventlist satisfies event[1]=event2)
 then 
-if (every x in eventlist[item[1]="Send invoice"] satisfies 
-(before (eventlist[item[1]="Generate invoice"][1][2], x[2])))
+if (every x in eventlist[item[1]=event2] satisfies 
+(before (eventlist[item[1]=event1][1][2], x[2])))
 then
 true
 else
@@ -193,8 +193,8 @@ true) = true</text>
       <output id="OutputClause_0x651wy" label="Conformance" name="conformance" typeRef="boolean" biodi:width="192" />
       <rule id="DecisionRule_0mgoc0e">
         <inputEntry id="UnaryTests_0g3wn57">
-          <text>(if (some event in eventlist satisfies event[1]="Generate invoice")
-then if (some event in eventlist satisfies event[1]="Send invoice") then if (every x in eventlist[item[1]="Generate invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],x))[1]+1][1]="Send invoice")) then true else false else false else true) = true</text>
+          <text>(if (some event in eventlist satisfies event[1]=event1)
+then if (some event in eventlist satisfies event[1]=event2) then if (every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event1)) then true else false else false else true) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0xhfl5a">
           <text>true
@@ -221,11 +221,11 @@ then if (some event in eventlist satisfies event[1]="Send invoice") then if (eve
       <output id="OutputClause_0z4h36o" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_0sej7vb">
         <inputEntry id="UnaryTests_1vm7r7g">
-          <text>(if (some event in eventlist satisfies event[1]="Generate invoice") 
+          <text>(if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice")
+	if (some event in eventlist satisfies event[1]=event2)
 	then
-		if (every x in eventlist[item[1]="Generate invoice"] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]="Send invoice")
+		if (every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)
 		then true
 		else false
 	else false
@@ -255,12 +255,12 @@ else true ) = true</text>
       <output id="OutputClause_0gi1m55" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_0s7hu6o">
         <inputEntry id="UnaryTests_0optqub">
-          <text>(if (some event in eventlist satisfies event[1]="Send invoice") 
+          <text>(if (some event in eventlist satisfies event[1]=event2) 
 then 
-	if (some event in eventlist satisfies event[1]="Generate invoice") 
+	if (some event in eventlist satisfies event[1]=event1) 
 	then 
-		if (every x in eventlist[item[1]="Send invoice"] satisfies 
-(after (x[2],eventlist[item[1]="Generate invoice"][1][2]))) 
+		if (every x in eventlist[item[1]=event2] satisfies 
+(after (x[2],eventlist[item[1]=event1][1][2]))) 
 		then true 
 		else false 
 	else false 
@@ -290,8 +290,8 @@ else true) = true</text>
       <output id="OutputClause_080fkyw" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1tr5vm6">
         <inputEntry id="UnaryTests_1bgar4g">
-          <text>(if (some event in eventlist satisfies event[1]="Send invoice")
-then if (some event in eventlist satisfies event[1]="Generate invoice") then if (every y in eventlist[item[1]="Send invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice"or item[1]="Send invoice"],y))[1]-1][1]="Generate invoice")) then true else false else false else true) = true</text>
+          <text>(if (some event in eventlist satisfies event[1]=event2)
+then if (some event in eventlist satisfies event[1]=event1) then if (every y in eventlist[item[1]=event2] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],y))[1]-1][1]=event1)) then true else false else false else true) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13czhts">
           <text>true</text>
@@ -317,11 +317,11 @@ then if (some event in eventlist satisfies event[1]="Generate invoice") then if 
       <output id="OutputClause_0dhf8fc" label="Conformance" name="conformance" typeRef="boolean" biodi:width="192" />
       <rule id="DecisionRule_09pg8y8">
         <inputEntry id="UnaryTests_06su7p9">
-          <text>(if (some event in eventlist satisfies event[1]="Send invoice") 
+          <text>(if (some event in eventlist satisfies event[1]=event2) 
 then 
-	if (some event in eventlist satisfies event[1]="Generate invoice") 
+	if (some event in eventlist satisfies event[1]=event1) 
 	then 
-		if (every y in eventlist[item[1]="Send invoice"] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]="Generate invoice"))
+		if (every y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1))
 		then true 
 		else false 
 	else false 
@@ -352,13 +352,13 @@ else true) = true</text>
       <rule id="DecisionRule_07dn5ms">
         <inputEntry id="UnaryTests_1u253vq">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice")
+if (some event in eventlist satisfies event[1]=event1)
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice")
+	if (some event in eventlist satisfies event[1]=event2)
 	then true 
 	else false 
 else 
-	if (some event in eventlist satisfies event[1]="Send invoice")
+	if (some event in eventlist satisfies event[1]=event2)
 	then false
 	else true
 ) = true</text>
@@ -388,16 +388,16 @@ else
       <rule id="DecisionRule_09sm6e3">
         <inputEntry id="UnaryTests_0iu08fl">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice") 
+if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then 
-		if (every x in eventlist[item[1]="Send invoice"] satisfies (before (eventlist[item[1]="Generate invoice"][1][2],x[2])))
+		if (every x in eventlist[item[1]=event2] satisfies (before (eventlist[item[1]=event1][1][2],x[2])))
 		then true
 		else false 
 	else false 
 else 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then false 
 	else true
 ) = true</text>
@@ -426,8 +426,8 @@ else
       <output id="OutputClause_11oojbr" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_0y077es">
         <inputEntry id="UnaryTests_0c0vpk9">
-          <text>(if (some event in eventlist satisfies event[1]="Generate invoice")  
-then if (some event in eventlist satisfies event[1]="Send invoice") then 	if ((every y in eventlist[item[1]="Send invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],y))[1]-1][1]="Generate invoice")) and (every x in eventlist[item[1]="Generate invoice"] satisfies ((eventlist[item[1]="Generate invoice" or item[1]="Send invoice"])[(index of(eventlist[item[1]="Generate invoice" or item[1]="Send invoice"],x))[1]+1][1]="Send invoice"))) then true else false else false else	if (some event in eventlist satisfies event[1]="Send invoice") then false else true) = true</text>
+          <text>(if (some event in eventlist satisfies event[1]=event1)  
+then if (some event in eventlist satisfies event[1]=event2) then 	if ((every y in eventlist[item[1]=event2] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],y))[1]-1][1]=event1)) and (every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event2))) then true else false else false else	if (some event in eventlist satisfies event[1]=event2) then false else true) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0jl921u">
           <text>true</text>
@@ -454,16 +454,16 @@ then if (some event in eventlist satisfies event[1]="Send invoice") then 	if ((e
       <rule id="DecisionRule_0lglkz3">
         <inputEntry id="UnaryTests_0wxlcx8">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice") 
+if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then 
-		if ((every y in eventlist[item[1]="Send invoice"] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]="Generate invoice")) and (every x in eventlist[item[1]="Generate invoice"] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]="Send invoice")))
+		if ((every y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1)) and (every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)))
 		then true
 		else false 
 	else false 
 else 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then false 
 	else true
 ) = true</text>
@@ -493,11 +493,11 @@ else
       <rule id="DecisionRule_1lp623e">
         <inputEntry id="UnaryTests_0mu06z4">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice") 
+if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then 
-		if (every x in eventlist[item[1]="Generate invoice"] satisfies (not(some y in eventlist[item[1]="Send invoice"] satisfies (before (x[2],y[2])))))
+		if (every x in eventlist[item[1]=event1] satisfies (not(some y in eventlist[item[1]=event2] satisfies (before (x[2],y[2])))))
 		then true
 		else false 
 	else true 
@@ -529,9 +529,9 @@ else true
       <rule id="DecisionRule_0tlkf1f">
         <inputEntry id="UnaryTests_0wder1w">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice") 
+if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then false
 	else true 
 else true
@@ -562,16 +562,16 @@ else true
       <rule id="DecisionRule_1e7xkkq">
         <inputEntry id="UnaryTests_1um7izh">
           <text>(
-if (some event in eventlist satisfies event[1]="Generate invoice") 
+if (some event in eventlist satisfies event[1]=event1) 
 then 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then 
-		if (not(some y in eventlist[item[1]="Send invoice"] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]="Generate invoice")) and not(some x in eventlist[item[1]="Generate invoice"] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]="Send invoice")))
+		if (not(some y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1)) and not(some x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)))
 		then true
 		else false 
 	else false 
 else 
-	if (some event in eventlist satisfies event[1]="Send invoice") 
+	if (some event in eventlist satisfies event[1]=event2) 
 	then false 
 	else true
 ) = true</text>
@@ -590,61 +590,82 @@ else
       </rule>
     </decisionTable>
   </decision>
+  <decision id="testDecision" name="Test Decision">
+    <decisionTable id="DecisionTable_0f2eo0p" hitPolicy="FIRST">
+      <input id="InputClause_1mcipfp" label="Eventlist">
+        <inputExpression id="LiteralExpression_0rcfttg" typeRef="Any">
+          <text>eventlist</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0608faz" label="Conformance" typeRef="Any" />
+      <rule id="DecisionRule_022q2fw">
+        <inputEntry id="UnaryTests_0j9tc3w">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13pqc2v">
+          <text>some event in eventlist satisfies event[1]=event1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="participationDecision">
-        <dc:Bounds height="80" width="180" x="160" y="100" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_0n5foed" dmnElementRef="initDecision">
-        <dc:Bounds height="80" width="180" x="160" y="310" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_1wgtul7" dmnElementRef="endDecision">
-        <dc:Bounds height="80" width="180" x="160" y="420" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_1x644ys" dmnElementRef="atmostoneDecision">
         <dc:Bounds height="80" width="180" x="160" y="200" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_1k1k0sc" dmnElementRef="respondedExistenceDecision">
-        <dc:Bounds height="80" width="180" x="380" y="100" />
+      <dmndi:DMNShape id="DMNShape_0n5foed" dmnElementRef="initDecision">
+        <dc:Bounds height="80" width="180" x="160" y="410" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_1p9o09o" dmnElementRef="responseDecision">
+      <dmndi:DMNShape id="DMNShape_1wgtul7" dmnElementRef="endDecision">
+        <dc:Bounds height="80" width="180" x="160" y="520" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1x644ys" dmnElementRef="atmostoneDecision">
+        <dc:Bounds height="80" width="180" x="160" y="300" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1k1k0sc" dmnElementRef="respondedExistenceDecision">
         <dc:Bounds height="80" width="180" x="380" y="200" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1p9o09o" dmnElementRef="responseDecision">
+        <dc:Bounds height="80" width="180" x="380" y="300" />
+      </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0n678q1" dmnElementRef="alternateResponseDecision">
-        <dc:Bounds height="80" width="180" x="380" y="310" />
+        <dc:Bounds height="80" width="180" x="380" y="410" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_01oek78" dmnElementRef="chainresponseDecision">
-        <dc:Bounds height="80" width="180" x="380" y="420" />
+        <dc:Bounds height="80" width="180" x="380" y="520" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_05xm0v2" dmnElementRef="precedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="200" />
+        <dc:Bounds height="80" width="180" x="600" y="300" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1hfdvu3" dmnElementRef="alternatePrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="310" />
+        <dc:Bounds height="80" width="180" x="600" y="410" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1d8jejh" dmnElementRef="chainPrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="420" />
+        <dc:Bounds height="80" width="180" x="600" y="520" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_089iw1z" dmnElementRef="coExistenceDecision">
-        <dc:Bounds height="80" width="180" x="820" y="100" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_1hcnzld" dmnElementRef="successionDecision">
         <dc:Bounds height="80" width="180" x="820" y="200" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1hcnzld" dmnElementRef="successionDecision">
+        <dc:Bounds height="80" width="180" x="820" y="300" />
+      </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1momqdd" dmnElementRef="alternateSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="820" y="310" />
+        <dc:Bounds height="80" width="180" x="820" y="410" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_12xz6e1" dmnElementRef="chainSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="820" y="420" />
+        <dc:Bounds height="80" width="180" x="820" y="520" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_18yjsuc" dmnElementRef="notSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="200" />
+        <dc:Bounds height="80" width="180" x="1050" y="300" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_005qurn" dmnElementRef="notCoExistenceDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="100" />
+        <dc:Bounds height="80" width="180" x="1050" y="200" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0vv9982" dmnElementRef="notChainSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="420" />
+        <dc:Bounds height="80" width="180" x="1050" y="520" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_03ucj1d" dmnElementRef="testDecision">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

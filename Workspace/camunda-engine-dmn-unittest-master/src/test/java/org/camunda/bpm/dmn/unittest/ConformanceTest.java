@@ -53,7 +53,7 @@ public class ConformanceTest {
 		// Parse decision
 		InputStream inputStream = getClass().getResourceAsStream("CC.dmn");
 		// chose which decision from the CC.dmn you want to execute
-//		DmnDecision decision = dmnEngine.parseDecision("participationDecision", inputStream);
+		DmnDecision decision = dmnEngine.parseDecision("participationDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("atmostoneDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("initDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("endDecision", inputStream);
@@ -66,11 +66,12 @@ public class ConformanceTest {
 //		DmnDecision decision = dmnEngine.parseDecision("chainPrecedenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("successionDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("alternateSuccessionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("alternateSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("chainSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notChainSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notCoExistenceDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("testDecision", inputStream);
 
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
@@ -96,13 +97,17 @@ public class ConformanceTest {
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainPrecedence.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\CoExistence.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Succession.csv")))
-						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateSuccession.csv")))
+//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AlternateSuccession.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\ChainSuccession.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotChainSuccession.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotSuccession.csv")))
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\NotCoExistence.csv")))
+						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\TestFile.csv")))
+		
 		{
-			
+			// Manual input of the event names we are using to do conformance checking
+			variables.putValue("event1", "a");
+			variables.putValue("event2", "b");
 			String line = "";
 			// Do the first readLine here to "remove" the headline
 			csvread.readLine();
