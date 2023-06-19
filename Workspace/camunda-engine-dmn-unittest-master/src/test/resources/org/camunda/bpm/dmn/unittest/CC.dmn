@@ -194,7 +194,7 @@ true) = true</text>
       <rule id="DecisionRule_0mgoc0e">
         <inputEntry id="UnaryTests_0g3wn57">
           <text>(if (some event in eventlist satisfies event[1]=event1)
-then if (some event in eventlist satisfies event[1]=event2) then if (every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event1)) then true else false else false else true) = true</text>
+then if (some event in eventlist satisfies event[1]=event2) then if (every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event2)) then true else false else false else true) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0xhfl5a">
           <text>true
@@ -222,14 +222,7 @@ then if (some event in eventlist satisfies event[1]=event2) then if (every x in 
       <rule id="DecisionRule_0sej7vb">
         <inputEntry id="UnaryTests_1vm7r7g">
           <text>(if (some event in eventlist satisfies event[1]=event1) 
-then 
-	if (some event in eventlist satisfies event[1]=event2)
-	then
-		if (every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)
-		then true
-		else false
-	else false
-else true ) = true</text>
+then if (some event in eventlist satisfies event[1]=event2) then if (every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)) then true else false else false else true ) = true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_04kko1s">
           <text>true</text>
@@ -561,20 +554,8 @@ else true
       <output id="OutputClause_0fz399j" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1e7xkkq">
         <inputEntry id="UnaryTests_1um7izh">
-          <text>(
-if (some event in eventlist satisfies event[1]=event1) 
-then 
-	if (some event in eventlist satisfies event[1]=event2) 
-	then 
-		if (not(some y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1)) and not(some x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)))
-		then true
-		else false 
-	else false 
-else 
-	if (some event in eventlist satisfies event[1]=event2) 
-	then false 
-	else true
-) = true</text>
+          <text>(if (some event in eventlist satisfies event[1]=event1) then if (some event in eventlist satisfies event[1]=event2) then if not(some x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)) then true else false else false else if (some event in eventlist satisfies event[1]=event2) then false else true) = true
+</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0y3k9z9">
           <text>true</text>
@@ -597,13 +578,13 @@ else
           <text>eventlist</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_0608faz" label="Conformance" typeRef="Any" />
+      <output id="OutputClause_0608faz" label="Conformance" name="conformance" typeRef="Any" />
       <rule id="DecisionRule_022q2fw">
         <inputEntry id="UnaryTests_0j9tc3w">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13pqc2v">
-          <text>some event in eventlist satisfies event[1]=event1</text>
+          <text>(not(some event in eventlist satisfies event[1]=event1) and not(some event in eventlist satisfies event[1]=event2)) or (every x in eventlist[item[1]=event2] satisfies (before (eventlist[item[1]=event1][1][2],x[2]))) or ((some event in eventlist satisfies event[1]=event1) and not(some event in eventlist satisfies event[1]=event2))</text>
         </outputEntry>
       </rule>
     </decisionTable>
