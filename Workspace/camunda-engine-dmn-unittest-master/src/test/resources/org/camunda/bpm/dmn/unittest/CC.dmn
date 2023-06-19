@@ -581,10 +581,18 @@ else true
       <output id="OutputClause_0608faz" label="Conformance" name="conformance" typeRef="Any" />
       <rule id="DecisionRule_022q2fw">
         <inputEntry id="UnaryTests_0j9tc3w">
-          <text></text>
+          <text>((some event in eventlist satisfies event[1]=event1) and not(some event in eventlist satisfies event[1]=event2)) or (every x in eventlist[item[1]=event2] satisfies (before (eventlist[item[1]=event1][1][2],x[2])))</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13pqc2v">
-          <text>(not(some event in eventlist satisfies event[1]=event1) and not(some event in eventlist satisfies event[1]=event2)) or (every x in eventlist[item[1]=event2] satisfies (before (eventlist[item[1]=event1][1][2],x[2]))) or ((some event in eventlist satisfies event[1]=event1) and not(some event in eventlist satisfies event[1]=event2))</text>
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1no56ov">
+        <inputEntry id="UnaryTests_0l225hr">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08jedwv">
+          <text>false</text>
         </outputEntry>
       </rule>
     </decisionTable>

@@ -67,11 +67,11 @@ public class ConformanceTest {
 //		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("successionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("alternateSuccessionDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("chainSuccessionDecision", inputStream);
+//		DmnDecision decision = dmnEngine.parseDecision("chainSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notChainSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notSuccessionDecision", inputStream);
 //		DmnDecision decision = dmnEngine.parseDecision("notCoExistenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("testDecision", inputStream);
+		DmnDecision decision = dmnEngine.parseDecision("testDecision", inputStream);
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
 		try (// parsing a CSV file into buffered reader class constructor
