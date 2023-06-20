@@ -9,6 +9,7 @@ To be able to look at the CC.dmn file and tables, https://camunda.com/download/m
 ## usage
 To check the conformance of an event log for given DMN tables, run the ConformanceTest Java class. <br>
 There are Event Logs and DMN tables for the different DECLARE constraints available. <br>
+To change the event logs, the events to test and the constraints to test conformance on, change the java code.
 ## todo
 - Add remaining DECLARE constraints
 - Make one big test for every constraint (against one event log?)
