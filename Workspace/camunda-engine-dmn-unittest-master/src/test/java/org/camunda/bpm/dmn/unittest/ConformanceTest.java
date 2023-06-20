@@ -74,16 +74,15 @@ public class ConformanceTest {
 		DmnDecision decision = dmnEngine.parseDecision("testDecision", inputStream);
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
+		// Manual input of the event names we are using to do conformance checking
+		variables.putValue("event1", "a");
+		variables.putValue("event2", "b");
+		
 		try (// parsing a CSV file into buffered reader class constructor
 				BufferedReader csvread = new BufferedReader(
-						// taking different CSV files (event logs) for each different constraint pattern to make sure
-						// to test relevant things
-						
+						// CSV files (event logs) for each different constraint pattern 
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Participation.csv"))) 
-						// multiple "Send invoice"
-// 						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne1.csv"))) 
-						// no "Send invoice"
-//						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne2.csv"))) 
+// 						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\AtMostOne.csv"))) 
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\Init.csv"))) 
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\End.csv"))) 	
 //						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\RespondedExistence.csv"))) 
@@ -103,9 +102,7 @@ public class ConformanceTest {
 						new FileReader("C:\\DMN CC\\dmn-cc\\Event Logs\\DECLARE Constraints\\TestFile.csv")))
 		
 		{
-			// Manual input of the event names we are using to do conformance checking
-			variables.putValue("event1", "a");
-			variables.putValue("event2", "b");
+
 			String line = "";
 			// Do the first readLine here to "remove" the headline
 			csvread.readLine();
@@ -114,6 +111,9 @@ public class ConformanceTest {
 		    // Initialize the list of all events that will be passed to the engine
 		    List<Object> eventlist = new ArrayList<>();
 		    // Go over every line of the CSV and add one entry to the list for each event
+		    // For a different structure of the event log, change the List<Object> event to match your needs.
+		    // In case you change the structure of entry 0 being the name and entry 1 being the timestamp,
+		    // you also need to change the structure of the DMN decisions. 
 			while ((line = csvread.readLine()) != null) {
 				String[] setup = line.split(";");
 				List<Object> event = new ArrayList<>(Arrays.asList(
@@ -129,6 +129,9 @@ public class ConformanceTest {
 		// Evaluate decision with id from file defined above while "Parse decision"
 		DmnDecisionTableResult results = dmnEngine.evaluateDecisionTable(decision, variables);
 
+		// TO-DO: Change the code below for proper testing (multiple decisions on one event log)
+		
+		
 		// Check that one rule has matched and print the result of that rule
 		assertThat(results).hasSize(1);
 		System.out.println(results);
