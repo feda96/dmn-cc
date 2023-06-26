@@ -33,7 +33,7 @@
           <text>eventlist</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_0n1qcp9" label="Conformance" name="conformance" typeRef="Any" />
+      <output id="OutputClause_0n1qcp9" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_1xe56bo">
         <inputEntry id="UnaryTests_0br4jh6">
           <text>((eventlist[1])[1] = event1) = true</text>
@@ -111,7 +111,7 @@
           <text>eventlist</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_04exszc" label="Conformance" name="conformance" typeRef="Any" />
+      <output id="OutputClause_04exszc" label="Conformance" name="conformance" typeRef="boolean" />
       <rule id="DecisionRule_0kvxoge">
         <inputEntry id="UnaryTests_0zxllkf">
           <text>((not(some event in eventlist satisfies event[1]=event1)) 
@@ -499,84 +499,61 @@ or
       </rule>
     </decisionTable>
   </decision>
-  <decision id="testDecision" name="Test Decision">
-    <decisionTable id="DecisionTable_0f2eo0p" hitPolicy="FIRST">
-      <input id="InputClause_1mcipfp" label="Eventlist">
-        <inputExpression id="LiteralExpression_0rcfttg" typeRef="Any">
-          <text>eventlist</text>
-        </inputExpression>
-      </input>
-      <output id="OutputClause_0608faz" label="Conformance" name="conformance" typeRef="Any" />
-      <rule id="DecisionRule_022q2fw">
-        <inputEntry id="UnaryTests_0j9tc3w">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_13pqc2v">
-          <text>((not(some event in eventlist satisfies event[1]=event1))
-or 
-((some event in eventlist satisfies event[1]=event1) and (not(some event in eventlist satisfies event[1]=event2))))</text>
-        </outputEntry>
-      </rule>
-    </decisionTable>
-  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="participationDecision">
-        <dc:Bounds height="80" width="180" x="160" y="200" />
+        <dc:Bounds height="80" width="180" x="160" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0n5foed" dmnElementRef="initDecision">
-        <dc:Bounds height="80" width="180" x="160" y="410" />
+        <dc:Bounds height="80" width="180" x="160" y="290" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1wgtul7" dmnElementRef="endDecision">
-        <dc:Bounds height="80" width="180" x="160" y="520" />
+        <dc:Bounds height="80" width="180" x="160" y="400" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1x644ys" dmnElementRef="atmostoneDecision">
-        <dc:Bounds height="80" width="180" x="160" y="300" />
+        <dc:Bounds height="80" width="180" x="160" y="180" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1k1k0sc" dmnElementRef="respondedExistenceDecision">
-        <dc:Bounds height="80" width="180" x="380" y="200" />
+        <dc:Bounds height="80" width="180" x="380" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1p9o09o" dmnElementRef="responseDecision">
-        <dc:Bounds height="80" width="180" x="380" y="300" />
+        <dc:Bounds height="80" width="180" x="380" y="180" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0n678q1" dmnElementRef="alternateResponseDecision">
-        <dc:Bounds height="80" width="180" x="380" y="410" />
+        <dc:Bounds height="80" width="180" x="380" y="290" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_01oek78" dmnElementRef="chainresponseDecision">
-        <dc:Bounds height="80" width="180" x="380" y="520" />
+        <dc:Bounds height="80" width="180" x="380" y="400" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_05xm0v2" dmnElementRef="precedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="300" />
+        <dc:Bounds height="80" width="180" x="600" y="180" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1hfdvu3" dmnElementRef="alternatePrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="410" />
+        <dc:Bounds height="80" width="180" x="600" y="290" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1d8jejh" dmnElementRef="chainPrecedenceDecision">
-        <dc:Bounds height="80" width="180" x="600" y="520" />
+        <dc:Bounds height="80" width="180" x="600" y="400" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_089iw1z" dmnElementRef="coExistenceDecision">
-        <dc:Bounds height="80" width="180" x="820" y="200" />
+        <dc:Bounds height="80" width="180" x="820" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1hcnzld" dmnElementRef="successionDecision">
-        <dc:Bounds height="80" width="180" x="820" y="300" />
+        <dc:Bounds height="80" width="180" x="820" y="180" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1momqdd" dmnElementRef="alternateSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="820" y="410" />
+        <dc:Bounds height="80" width="180" x="820" y="290" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_12xz6e1" dmnElementRef="chainSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="820" y="520" />
+        <dc:Bounds height="80" width="180" x="820" y="400" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_18yjsuc" dmnElementRef="notSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="300" />
+        <dc:Bounds height="80" width="180" x="1050" y="180" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_005qurn" dmnElementRef="notCoExistenceDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="200" />
+        <dc:Bounds height="80" width="180" x="1050" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0vv9982" dmnElementRef="notChainSuccessionDecision">
-        <dc:Bounds height="80" width="180" x="1050" y="520" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_03ucj1d" dmnElementRef="testDecision">
-        <dc:Bounds height="80" width="180" x="160" y="80" />
+        <dc:Bounds height="80" width="180" x="1050" y="400" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

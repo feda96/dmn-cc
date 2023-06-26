@@ -16,14 +16,11 @@
  */
 package org.camunda.bpm.dmn.unittest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.time.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,28 +47,10 @@ public class ConformanceTest {
 		// Get DMN engine
 		DmnEngine dmnEngine = rule.getDmnEngine();
 
-		// Parse decision
+		// Parse DMN model
 		InputStream inputStream = getClass().getResourceAsStream("CC.dmn");
-		// chose which decision from the CC.dmn you want to execute
-//		DmnDecision decision = dmnEngine.parseDecision("participationDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("atmostoneDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("initDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("endDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("respondedExistenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("responseDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("alternateResponseDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("chainresponseDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("precedenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("alternatePrecedenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("chainPrecedenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("coExistenceDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("successionDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("alternateSuccessionDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("chainSuccessionDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("notChainSuccessionDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("notSuccessionDecision", inputStream);
-//		DmnDecision decision = dmnEngine.parseDecision("notCoExistenceDecision", inputStream);
-		DmnDecision decision = dmnEngine.parseDecision("testDecision", inputStream);
+		// creating a decisionList where all decisions are added
+		List<DmnDecision> decisionList = dmnEngine.parseDecisions(inputStream);
 		// Set input variables
 		VariableMap variables = Variables.createVariables();
 		// Manual input of the event names we are using to do conformance checking
@@ -123,35 +102,36 @@ public class ConformanceTest {
 			}
 			// add the list of events (list of lists) to the variables that will be send to the dmn engine
 			variables.putValue("eventlist", eventlist);
-			System.out.println(eventlist);
 		}
 
-		// Evaluate decision with id from file defined above while "Parse decision"
-		DmnDecisionTableResult results = dmnEngine.evaluateDecisionTable(decision, variables);
-
-		// TO-DO: Change the code below for proper testing (multiple decisions on one event log)
 		
+		// evaluate all decisions
+		List<Object> decisionResultsTrue = new ArrayList<>();
+		List<Object> decisionResultsFalse = new ArrayList<>();
+		//remember the number of ALL decisions
+		int allDecisions = decisionList.size();
+		while (!decisionList.isEmpty()) {
+		// get the result of all of the decisions one by one
+		DmnDecisionTableResult results = dmnEngine.evaluateDecisionTable(decisionList.get(0), variables);
+		// if the result of the decision is true, add it to the decisionResultsTrue list else to decisionResultsFalse
+		if((boolean) results.get(0).get("conformance")) {
+			decisionResultsTrue.add(decisionList.get(0).getKey());
+		}
+		else {
+			decisionResultsFalse.add(decisionList.get(0).getKey());
+		}
+		decisionList.remove(0);
+		}
+		// sysout the percentage of conformance and non-conformance decisions with the event log
+		// also print out the decisions that are conform/non-conform
+		System.out.println("Conformance:");
+		System.out.println((float)decisionResultsTrue.size()/allDecisions*100+"% ("+decisionResultsTrue.size()+" out of " + allDecisions+")");
+		System.out.println(decisionResultsTrue);
 		
-		// Check that one rule has matched and print the result of that rule
-		assertThat(results).hasSize(1);
-		System.out.println(results);
-
-		DmnDecisionRuleResult result = results.getSingleResult();
-		assertThat(result).containsOnly(entry("conformance", true)
-//        entry("reason", "you took too much man, you took too much!")
-		);
-
-//// 	  Change input variables
-//		variables.putValue("status", "gold");
-//
-////    Evaluate decision again
-//		results = dmnEngine.evaluateDecisionTable(decision, variables);
-//
-////    Check new result
-//		assertThat(results).hasSize(1);
-//
-//		result = results.getSingleResult();
-//		assertThat(result).containsOnly(entry("result", "ok"), entry("reason", "you get anything you want"));
+		System.out.println("non-Conformance");
+		System.out.println((float)decisionResultsFalse.size()/allDecisions*100+"%  ("+decisionResultsFalse.size()+" out of " + allDecisions+")");
+		System.out.println(decisionResultsFalse);
+		
 	}
 
 }
